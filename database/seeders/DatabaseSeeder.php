@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->count(10)->create();
 
         Article::factory()->count(35)->create()->each(function ($article) {
-            $numberOfComments = mt_rand(0, 30);
+            $numberOfComments = mt_rand(0, 40);
             $article->comments()->saveMany(Comment::factory()->count($numberOfComments)->make());
         });
     }

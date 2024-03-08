@@ -2,27 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
 use Illuminate\Http\Request;
 
-class ArticleController extends Controller
+class CommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        $articles = Article::latest()->paginate(10);
-        return view('article.index', ['articles' => $articles]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -30,15 +13,6 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Article $article)
-    {
-        $article->load('comments');
-        return view('article.show', ['article' => $article]);
     }
 
     /**

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,9 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::resource('articles', ArticleController::class)->only(['index', 'show']);
+Route::resource('articles', ArticleController::class)->only(['index', 'show', 'store', 'create']);
+
+
+Route::resource('comments', CommentController::class)->except('index', 'show');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
