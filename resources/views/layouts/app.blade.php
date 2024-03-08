@@ -16,7 +16,7 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss'])
 </head>
-<body>
+<body >
     <div id="app">
         <main class="py-4">
             @yield('content')
