@@ -20,7 +20,7 @@ class ArticleFactory extends Factory
         return [
             'user_id' => User::factory(),
             'title' => $this->faker->text(5, 70),
-            'content' => $this->faker->sentence(mt_rand(3,10)),
+            'content' => $this->faker->sentence(mt_rand(20,60)),
             'image' => $this->faker->imageUrl(),
         ];
     }
