@@ -1,5 +1,5 @@
 <div class="sidebar">
-    <h4>Топ 5 статей з найбільшою кількістю коментарів:</h4>
+    <h5>Топ 5 статей з найбільшою кількістю коментарів:</h5>
     <ul class="list-group">
         @foreach ($topArticles as $article)
             <li class="list-group-item">

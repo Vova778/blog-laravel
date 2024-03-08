@@ -14,7 +14,7 @@
                     </x-article-card>
                 @endforeach
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <x-sidebar />
             </div>
         </div>
