@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="card-header">{{ $article->title }}</div>
+    <div class="card-header"><h4> {{ $article->title }}</h4></div>
     <div class="card-body">
 
         <img src="{{ $article->image }}" class="card-img-top" alt="Article Image">

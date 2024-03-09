@@ -23,6 +23,10 @@ Auth::routes();
 Route::resource('articles', ArticleController::class)->only(['index', 'show', 'store', 'create']);
 
 
-Route::resource('comments', CommentController::class)->except('index', 'show');
+Route::resource('articles.comments', CommentController::class)->except('index', 'show');
+
+Route::middleware('auth')->group(function () {
+
+});
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
