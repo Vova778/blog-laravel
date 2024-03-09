@@ -31,24 +31,40 @@ class CommentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Comment $comment)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request,Article $article, Comment $comment)
     {
-        //
+
+        $request->validate([
+            'comment' => 'required|min:3|max:150',
+        ]);
+
+        $comment->update([
+            'comment' => $request->input('comment'),
+        ]);
+
+        return redirect()->back()->with(
+            'success',
+            'Comment updated.'
+        );
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Article $article, Comment $comment)
     {
-        //
+
+        $comment->delete();
+
+        return redirect()->back()->with(
+            'success',
+            'Comment removed.'
+        );
+
     }
 }

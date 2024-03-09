@@ -23,7 +23,7 @@ Auth::routes();
 Route::resource('articles', ArticleController::class)->only(['index', 'show', 'store', 'create']);
 
 
-Route::resource('articles.comments', CommentController::class)->except('index', 'show');
+Route::resource('articles.comments', CommentController::class)->only('store', 'update', 'destroy');
 
 Route::middleware('auth')->group(function () {
 
