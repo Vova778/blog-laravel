@@ -11,6 +11,8 @@ class Article extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['user_id','title', 'content', 'image'];
+
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);

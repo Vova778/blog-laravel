@@ -5,8 +5,11 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">Dashboard</div>
+                    <div class="card-header d-flex align-items-center justify-content-center">Dashboard</div>
                     <div class="card-body">
+                        <div class="mb-3">
+                            <a href="{{ route('articles.create') }}" class="btn btn-success ml-]">Add New Post</a>
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <thead>
@@ -41,7 +44,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        
+
                         <x-pagination :paginator="$articles" />
 
                     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use Illuminate\Http\Request;
 
@@ -27,15 +28,22 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.article.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ArticleRequest $request)
     {
-        //
+        $article = Article::create([
+            'user_id' => auth()->id(),
+            'title' => $request['title'],
+            'content' => $request['content'],
+            'image' => $request['image'],
+        ]);
+
+        return redirect()->route('admin.dashboard')->with('success', 'Article created successfully');
     }
 
     /**
@@ -50,24 +58,34 @@ class ArticleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Article $article)
     {
-        //
+        return view('admin.article.edit', ['article' =>  $article]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ArticleRequest $request, Article $article)
     {
-        //
-    }
+        $article->update([
+            'title' => $request['title'],
+            'content' => $request['content'],
+            'image' => $request['image'],
+        ]);
 
+        return redirect()->route('admin.dashboard')->with('success', 'Article updated successfully');
+    }
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Article $article)
     {
-        //
+        $article->delete();
+
+        return redirect()->back()->with(
+            'success',
+            'Article removed.'
+        );
     }
 }
