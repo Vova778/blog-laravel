@@ -4,17 +4,17 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 d-flex flex-column gap-3">
-                @foreach ($articles as $article)
-                    <x-article-card :$article>
+                @foreach ($posts as $post)
+                    <x-post-card :$post>
                         <div>
-                            <a class="btn btn-primary" href="{{ route('articles.show', $article) }}">
+                            <a class="btn btn-primary" href="{{ route('posts.show', $post) }}">
                                 Show
                             </a>
                         </div>
-                    </x-article-card>
+                    </x-post-card>
                 @endforeach
 
-                <x-pagination :paginator="$articles" />
+                <x-pagination :paginator="$posts" />
 
             </div>
             <div class="col-md-2">

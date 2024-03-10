@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ArticleRequest;
-use App\Models\Article;
+use App\Http\Requests\PostRequest;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
-class ArticleController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $articles = Article::latest()->paginate(10);
-        return view('article.index', ['articles' => $articles]);
+        $posts = Post::latest()->paginate(10);
+        return view('post.index', ['posts' => $posts]);
     }
 
     public function adminIndex()
     {
-        $articles = Article::with('user')->withCount('comments')->latest()->paginate(10);
-        return view('admin.dashboard', ['articles' => $articles]);
+        $posts = Post::with('user')->withCount('comments')->latest()->paginate(10);
+        return view('admin.dashboard', ['posts' => $posts]);
     }
 
     /**
@@ -28,68 +28,68 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('admin.article.create');
+        return view('admin.post.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ArticleRequest $request)
+    public function store(postRequest $request)
     {
 
         $file = $request->file('image');
         $path = $file->store('images', 'public');
 
-        $article = Article::create([
+        $post = Post::create([
             'user_id' => auth()->id(),
             'title' => $request['title'],
             'content' => $request['content'],
             'image' => $path,
         ]);
 
-        return redirect()->route('articles.show', $article)->with('success', 'Article created successfully');
+        return redirect()->route('posts.show', $post)->with('success', 'Post created successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Article $article)
+    public function show(Post $post)
     {
-        $article->load('comments');
-        return view('article.show', ['article' => $article]);
+        $post->load('comments');
+        return view('post.show', ['post' => $post]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Article $article)
+    public function edit(Post $post)
     {
-        return view('admin.article.edit', ['article' =>  $article]);
+        return view('admin.post.edit', ['post' =>  $post]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(ArticleRequest $request, Article $article)
+    public function update(PostRequest $request, Post $post)
     {
-        $article->update([
+        $post->update([
             'title' => $request['title'],
             'content' => $request['content'],
             'image' => $request['image'],
         ]);
 
-        return redirect()->route('admin.dashboard')->with('success', 'Article updated successfully');
+        return redirect()->route('admin.dashboard')->with('success', 'Post updated successfully');
     }
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Article $article)
+    public function destroy(Post $post)
     {
-        $article->delete();
+        $post->delete();
 
         return redirect()->back()->with(
             'success',
-            'Article removed.'
+            'Post removed.'
         );
     }
 }

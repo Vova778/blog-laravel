@@ -2,20 +2,20 @@
 
 namespace App\View\Components;
 
-use App\Models\Article;
+use App\Models\Post;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class Sidebar extends Component
 {
-    public $topArticles;
+    public $topPosts;
     /**
      * Create a new component instance.
      */
     public function __construct()
     {
-        $this->topArticles = Article::withCount('comments')
+        $this->topPosts = Post::withCount('comments')
             ->orderBy('comments_count', 'desc')
             ->take(5)
             ->get();

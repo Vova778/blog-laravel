@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentRequest;
-use App\Models\Article;
+use App\Models\Post;
 use App\Models\Comment;
 
 class CommentController extends Controller
@@ -12,23 +12,23 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CommentRequest $request, Article $article)
+    public function store(CommentRequest $request, Post $post)
     {
 
-        $article->comments()->create([
-            'user_id' => auth()->id,
+        $post->comments()->create([
+            'user_id' => auth()->user()->id,
             'comment' => $request['comment'],
-            'article_id' => $article->id
+            'post_id' => $post->id
         ]);
 
-        return redirect()->route('articles.show', $article)
+        return redirect()->route('posts.show', $post)
             ->with('success', 'Comment added.');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(CommentRequest $request, Article $article, Comment $comment)
+    public function update(CommentRequest $request, Post $post, Comment $comment)
     {
         $comment->update([
             'comment' => $request['comment'],
@@ -40,7 +40,7 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Article $article, Comment $comment)
+    public function destroy(Post $post, Comment $comment)
     {
         $comment->delete();
 

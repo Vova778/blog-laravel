@@ -2,5 +2,5 @@
 
 @section('content')
 
-  @include('admin.article.form')
+  @include('admin.post.form')
 @endsection

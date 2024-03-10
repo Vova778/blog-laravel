@@ -1,4 +1,4 @@
-<!-- resources/views/articles/show.blade.php -->
+<!-- resources/views/posts/show.blade.php -->
 @extends('layouts.app')
 
 @section('content')
@@ -6,13 +6,13 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
 
-                <x-article-card :$article />
+                <x-post-card :$post />
 
                 <!-- Форма для коментарів -->
                 <div class="mt-4">
 
                     <h4>Add Comment</h4>
-                    <form action="{{ route('articles.comments.store', $article) }}" method="POST">
+                    <form action="{{ route('posts.comments.store', $post) }}" method="POST">
                         @csrf
                         <div class="mb-3">
                             <textarea required class="form-control" name="comment" placeholder="Написати коментар..." rows="3" @error('comment') is-invalid @enderror></textarea>
@@ -26,14 +26,14 @@
 
                 <div class="mt-4">
                     <h4>Comments</h4>
-                    @forelse ($article->comments as $comment)
+                    @forelse ($post->comments as $comment)
                         <div class="mb-3">
                             <strong>{{ $comment->user->name }}</strong>: <span
                                 id="comment-{{ $comment->id }}">{{ $comment->comment }}</span>
 
                             @if (true)
                                 <form
-                                    action="{{ route('articles.comments.destroy', ['article' => $article, 'comment' => $comment->id]) }}"
+                                    action="{{ route('posts.comments.destroy', ['post' => $post, 'comment' => $comment->id]) }}"
                                     method="POST" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
@@ -45,7 +45,7 @@
 
                                 <div id="edit-form-{{ $comment->id }}" style="display: none;">
                                     <form
-                                        action="{{ route('articles.comments.update', ['article' => $article, 'comment' => $comment->id]) }}"
+                                        action="{{ route('posts.comments.update', ['post' => $post, 'comment' => $comment->id]) }}"
                                         method="POST">
                                         @csrf
                                         @method('PUT')

@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Article;
+use App\Models\Post;
 use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -24,9 +24,9 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->count(10)->create();
 
-        Article::factory()->count(5)->create()->each(function ($article) {
+        Post::factory()->count(5)->create()->each(function ($post) {
             $numberOfComments = mt_rand(0, 40);
-            $article->comments()->saveMany(Comment::factory()->count($numberOfComments)->make());
+            $post->comments()->saveMany(Comment::factory()->count($numberOfComments)->make());
         });
     }
 }
