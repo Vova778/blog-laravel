@@ -20,13 +20,14 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::resource('articles', ArticleController::class)->only(['index', 'show', 'store', 'create']);
-
-
-Route::resource('articles.comments', CommentController::class)->only('store', 'update', 'destroy');
+Route::resource('articles', ArticleController::class)->only(['index', 'show']);
 
 Route::middleware('auth')->group(function () {
+    Route::resource('articles.comments', CommentController::class)->only('store', 'update', 'destroy');
 
+    Route::resource('admin/articles', ArticleController::class)->except(['index', 'show']);
+
+    Route::get('admin/articles', [ArticleController::class, 'adminIndex'])->name('admin.dashboard');
 });
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');

@@ -16,6 +16,12 @@ class ArticleController extends Controller
         return view('article.index', ['articles' => $articles]);
     }
 
+    public function adminIndex()
+    {
+        $articles = Article::with('user')->withCount('comments')->latest()->paginate(10);
+        return view('admin.dashboard', ['articles' => $articles]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
