@@ -21,7 +21,8 @@ class ArticleFactory extends Factory
             'user_id' => User::factory(),
             'title' => $this->faker->text(15, 70),
             'content' => $this->faker->sentence(mt_rand(120,260)),
-            'image' => $this->faker->imageUrl(),
+            'image' => 'fakeImages\Image_test.png'
+
         ];
     }
 }

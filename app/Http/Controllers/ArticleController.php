@@ -36,14 +36,18 @@ class ArticleController extends Controller
      */
     public function store(ArticleRequest $request)
     {
+
+        $file = $request->file('image');
+        $path = $file->store('images', 'public');
+
         $article = Article::create([
             'user_id' => auth()->id(),
             'title' => $request['title'],
             'content' => $request['content'],
-            'image' => $request['image'],
+            'image' => $path,
         ]);
 
-        return redirect()->route('admin.dashboard')->with('success', 'Article created successfully');
+        return redirect()->route('articles.show', $article)->with('success', 'Article created successfully');
     }
 
     /**

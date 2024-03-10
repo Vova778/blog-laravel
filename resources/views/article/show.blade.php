@@ -15,12 +15,10 @@
                     <form action="{{ route('articles.comments.store', $article) }}" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <textarea required class="form-control" name="comment" placeholder="Написати коментар..." rows="3"></textarea>
+                            <textarea required class="form-control" name="comment" placeholder="Написати коментар..." rows="3" @error('comment') is-invalid @enderror></textarea>
                         </div>
                         @error('comment')
-                            <div class="text-danger">
-                                {{ $message }}
-                            </div>
+                            <div class="invalid-feedback"> {{ $message }} </div>
                         @enderror
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
@@ -51,7 +49,10 @@
                                         method="POST">
                                         @csrf
                                         @method('PUT')
-                                        <textarea class="form-control" name="comment" rows="3">{{ $comment->comment }}</textarea>
+                                        <textarea class="form-control" name="comment" rows="3" @error('comment') is-invalid @enderror>{{ $comment->comment }}</textarea>
+                                        @error('comment')
+                                            <div class="invalid-feedback"> {{ $message }} </div>
+                                        @enderror
                                         <button type="submit" class="btn btn-primary btn-sm mt-2">Save</button>
                                     </form>
                                 </div>
