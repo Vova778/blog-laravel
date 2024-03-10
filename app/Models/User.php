@@ -54,4 +54,9 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
+    public function isAdmin(): bool
+    {
+        return $this->is_admin;
+    }
+
 }

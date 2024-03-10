@@ -16,15 +16,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
         User::factory()->create([
             'name' => 'Test User',
-            'email' => 'test@example.com',
+            'email' => 'justforreg4@gmail.com',
+            'is_admin' => true
         ]);
 
         User::factory()->count(10)->create();
 
-        Article::factory()->count(35)->create()->each(function ($article) {
+        Article::factory()->count(5)->create()->each(function ($article) {
             $numberOfComments = mt_rand(0, 40);
             $article->comments()->saveMany(Comment::factory()->count($numberOfComments)->make());
         });
