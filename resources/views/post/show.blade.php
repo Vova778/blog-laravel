@@ -27,47 +27,13 @@
                 <div class="mt-4">
                     <h4>Comments</h4>
                     @forelse ($post->comments as $comment)
-                        <div class="mb-3">
-                            <strong>{{ $comment->user->name }}</strong>: <span
-                                id="comment-{{ $comment->id }}">{{ $comment->comment }}</span>
-
-                            @if (true)
-                                <form
-                                    action="{{ route('posts.comments.destroy', ['post' => $post, 'comment' => $comment->id]) }}"
-                                    method="POST" style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                </form>
-
-                                <button class="btn btn-primary btn-sm"
-                                    onclick="showEditForm('{{ $comment->id }}')">Edit</button>
-
-                                <div id="edit-form-{{ $comment->id }}" style="display: none;">
-                                    <form
-                                        action="{{ route('posts.comments.update', ['post' => $post, 'comment' => $comment->id]) }}"
-                                        method="POST">
-                                        @csrf
-                                        @method('PUT')
-                                        <textarea class="form-control" name="comment" rows="3" @error('comment') is-invalid @enderror>{{ $comment->comment }}</textarea>
-                                        @error('comment')
-                                            <div class="invalid-feedback"> {{ $message }} </div>
-                                        @enderror
-                                        <button type="submit" class="btn btn-primary btn-sm mt-2">Save</button>
-                                    </form>
-                                </div>
-                            @endif
-
-                        </div>
+                        <x-comment :$comment :$post />
                     @empty
                         <div class="mb-3">
                             <h3>No comments yet!</h3>
                         </div>
                     @endforelse
                 </div>
-
-
-
             </div>
 
             <div class="col-md-2">
