@@ -25,8 +25,8 @@ Route::resource('posts', PostController::class)->only(['index', 'show']);
 Route::middleware('auth')->group(function () {
     Route::resource('posts.comments', CommentController::class)->only('store', 'update', 'destroy');
 
-    Route::resource('admin/posts', PostController::class)->except(['index', 'show']);
-
-    Route::get('admin/posts', [PostController::class, 'adminIndex'])->name('admin.dashboard');
+    Route::middleware('admin')->group(function () {
+        Route::resource('admin/posts', PostController::class)->except(['index', 'show']);
+        Route::get('admin/posts', [PostController::class, 'adminIndex'])->name('admin.dashboard');
+    });
 });
-

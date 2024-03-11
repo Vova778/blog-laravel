@@ -9,6 +9,11 @@ use App\Models\Comment;
 class CommentController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->authorizeResource(Comment::class, 'comment');
+    }
+
     /**
      * Store a newly created resource in storage.
      */
