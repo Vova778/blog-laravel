@@ -17,12 +17,14 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            'user_id' => User::factory(),
-            'title' => $this->faker->text(15, 70),
-            'content' => $this->faker->sentence(mt_rand(120,260)),
-            'image' => 'fakeImages\Image_test.png'
+        $createdAt = $this->faker->dateTimeBetween('-2 months', 'now');
 
+        return [
+            'title' => $this->faker->text(15, 70),
+            'content' => $this->faker->sentence(mt_rand(220,360), true),
+            'image' => 'fakeImages\Image_test.png',
+            'created_at' => $createdAt,
+            'updated_at' => $createdAt,
         ];
     }
 }

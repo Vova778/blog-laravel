@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6 d-flex flex-column gap-3">
+    <div class="container bg-light p-4">
+        <div class="row justify-content-center ">
+            <div class="col-md-6 d-flex flex-column gap-3 ">
                 @foreach ($posts as $post)
                     <x-post-card :$post>
-                        <div>
+                        <div class="d-flex justify-content-end">
                             <a class="btn btn-primary" href="{{ route('posts.show', $post) }}">
                                 Show
                             </a>

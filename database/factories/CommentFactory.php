@@ -18,10 +18,12 @@ class CommentFactory extends Factory
      */
     public function definition(): array
     {
+        $createdAt = $this->faker->dateTimeBetween('-2 months', 'now');
+
         return [
-            'post_id' => Post::factory(),
-            'user_id' => User::factory(),
-            'comment' => $this->faker->text(150)
+            'comment' => $this->faker->text(150),
+            'created_at' => $createdAt,
+            'updated_at' => $createdAt,
         ];
     }
 }

@@ -2,9 +2,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+    <div class="container bg-light p-4" >
+        <div class="row justify-content-center ">
+            <div class="col-md-8 ">
 
                 <x-post-card :$post />
 
@@ -12,6 +12,7 @@
                 <div class="mt-4">
 
                     <h4>Add Comment</h4>
+
                     <form action="{{ route('posts.comments.store', $post) }}" method="POST">
                         @csrf
                         <div class="mb-3">
@@ -20,8 +21,9 @@
                         @error('comment')
                             <div class="invalid-feedback"> {{ $message }} </div>
                         @enderror
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" onclick="" >Submit</button>
                     </form>
+
                 </div>
 
                 <div class="mt-4">
@@ -49,6 +51,7 @@
     function showEditForm(commentId) {
         var editForm = document.getElementById('edit-form-' + commentId);
         var commentText = document.getElementById('comment-' + commentId);
+
         if (editForm.style.display === "none") {
             editForm.style.display = "block";
             commentText.style.display = "none";

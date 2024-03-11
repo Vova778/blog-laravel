@@ -4,7 +4,7 @@
     <!-- resources/views/posts/form.blade.php -->
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-6 bg-light p-4">
                 <form action="{{ isset($post) ? route('posts.update', $post) : route('posts.store') }}"
                     method="POST" enctype="multipart/form-data">
                     @csrf
@@ -29,9 +29,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Image</label>
-                        <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" value="$post->image"
-                            name="image">
-                    
+                        <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" value="$post->image" name="image">
+
                         @error('image')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

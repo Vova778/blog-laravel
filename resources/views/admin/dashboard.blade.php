@@ -3,11 +3,11 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-10">
+            <div class="col-md-10 bg-light p-4">
                 <div class="card">
                     <div class="card-header d-flex align-items-center justify-content-center">Dashboard</div>
                     <div class="card-body">
-                        <div class="mb-3">
+                        <div class="mb-3 d-flex justify-content-end">
                             <a href="{{ route('posts.create') }}" class="btn btn-success ml-]">Add New Post</a>
                         </div>
                         <div class="table-responsive">
