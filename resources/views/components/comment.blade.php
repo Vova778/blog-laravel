@@ -15,7 +15,7 @@
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                 </form>
-                <button class="btn btn-primary btn-sm " style="margin-top: -13px;" onclick="showEditForm('{{ $comment->id }}')">Edit</button>
+                <button class="btn btn-primary btn-sm" onclick="showEditForm('{{ $comment->id }}')">Edit</button>
             </div>
             @endif
         </div>
@@ -26,7 +26,7 @@
                 method="POST">
                 @csrf
                 @method('PUT')
-                <textarea class="form-control mt-2" name="comment" rows="3" @error('comment') is-invalid @enderror>{{ $comment->comment }}</textarea>
+                <textarea class="form-control mt-2 @error('comment') is-invalid @enderror" name="comment" rows="3" >{{ $comment->comment }}</textarea>
                 @error('comment')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror

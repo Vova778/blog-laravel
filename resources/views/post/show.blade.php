@@ -10,20 +10,17 @@
 
                 <!-- Форма для коментарів -->
                 <div class="mt-4">
-
                     <h4>Add Comment</h4>
-
                     <form action="{{ route('posts.comments.store', $post) }}" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <textarea required class="form-control" name="comment" placeholder="Написати коментар..." rows="3" @error('comment') is-invalid @enderror></textarea>
+                            <textarea required class="form-control @error('comment') is-invalid @enderror" name="comment" placeholder="Написати коментар..." rows="3">{{ old('comment') }}</textarea>
+                            @error('comment')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
-                        @error('comment')
-                            <div class="invalid-feedback"> {{ $message }} </div>
-                        @enderror
-                        <button type="submit" class="btn btn-primary" onclick="" >Submit</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
-
                 </div>
 
                 <div class="mt-4">
@@ -46,18 +43,3 @@
     </div>
 @endsection
 
-
-<script>
-    function showEditForm(commentId) {
-        var editForm = document.getElementById('edit-form-' + commentId);
-        var commentText = document.getElementById('comment-' + commentId);
-
-        if (editForm.style.display === "none") {
-            editForm.style.display = "block";
-            commentText.style.display = "none";
-        } else {
-            editForm.style.display = "none";
-            commentText.style.display = "inline";
-        }
-    }
-</script>
