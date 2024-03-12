@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -16,7 +17,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+Route::redirect('/', '/posts');
 Auth::routes();
 
-Route::resource('articles', ArticleController::class)->only(['index', 'show']);
+Route::resource('posts', PostController::class)->only(['index', 'show']);
+
+Route::middleware('auth')->group(function () {
+    Route::resource('posts.comments', CommentController::class)->only('store', 'update', 'destroy');
+
+    Route::middleware('admin')->group(function () {
+        Route::resource('admin/posts', PostController::class)->except(['index', 'show']);
+        Route::get('admin/posts', [PostController::class, 'adminIndex'])->name('admin.dashboard');
+    });
+});

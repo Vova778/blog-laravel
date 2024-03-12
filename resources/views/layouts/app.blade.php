@@ -16,8 +16,9 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss'])
 </head>
-<body>
+<body class="bg-info p-2" style="--bs-bg-opacity: .2;">
     <div id="app">
+        @include('components.header')
         <main class="py-4">
             @yield('content')
         </main>

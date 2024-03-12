@@ -2,14 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Comment>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
  */
-class CommentFactory extends Factory
+class PostFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -21,7 +20,9 @@ class CommentFactory extends Factory
         $createdAt = $this->faker->dateTimeBetween('-2 months', 'now');
 
         return [
-            'comment' => $this->faker->text(150),
+            'title' => $this->faker->text(15, 70),
+            'content' => $this->faker->sentence(mt_rand(220,360), true),
+            'image' => 'fakeImages\Image_test.png',
             'created_at' => $createdAt,
             'updated_at' => $createdAt,
         ];
