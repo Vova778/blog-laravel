@@ -1,10 +1,17 @@
 <div class="card">
-    <div class="card-header"><h4>{{ $post->title }}</h4></div>
+    <div class="card-header">
+        <h4>
+            {{ $post->title }}
+            @if ($post->is_new)
+                <span class="badge bg-primary">New</span>
+            @endif
+        </h4>
+    </div>
     <div class="card-body">
-        <img src="{{ asset('storage/'.$post->image) }}" class="card-img-top" alt="post Image">
+        <img src="{{ asset('storage/' . $post->image) }}" class="card-img-top" alt="post Image">
         <div class="mt-3">
             <p class="card-text">{{ $post->content }}</p>
-            {{$slot}}
+            {{ $slot }}
         </div>
     </div>
     <div class="card-footer text-muted">
