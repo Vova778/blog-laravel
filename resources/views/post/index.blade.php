@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container bg-light p-4">
+    <div class="container ">
         <div class="row justify-content-center ">
-            <div class="col-md-6 d-flex flex-column gap-3 ">
+            <div class="col-md-6 d-flex flex-column gap-3 bg-light p-4">
                 @foreach ($posts as $post)
                     <x-post-card :$post>
                         <div class="d-flex justify-content-end">

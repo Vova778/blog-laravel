@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CommentRequest;
 use App\Models\Post;
 use App\Models\Comment;
+use App\Notifications\NewCommentNotification;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class CommentController extends Controller
 {
@@ -20,11 +23,16 @@ class CommentController extends Controller
     public function store(CommentRequest $request, Post $post)
     {
 
-        $post->comments()->create([
+        $comment = $post->comments()->create([
             'user_id' => auth()->user()->id,
             'comment' => $request['comment'],
             'post_id' => $post->id
         ]);
+
+
+        if ($comment->user_id !== $post->user_id) {
+            Notification::send($post->user, new NewCommentNotification($comment, $post));
+        }
 
         return redirect()->route('posts.show', $post)
             ->with('success', 'Comment added.');

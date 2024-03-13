@@ -2,9 +2,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container bg-light p-4" >
+    <div class="container " >
         <div class="row justify-content-center ">
-            <div class="col-md-8 ">
+            <div class="col-md-8 bg-light p-4">
 
                 <x-post-card :$post />
 
