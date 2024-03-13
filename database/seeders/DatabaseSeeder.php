@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,12 +27,17 @@ class DatabaseSeeder extends Seeder
             'is_admin' => true,
         ]);
 
-
         $users = User::all();
+
+        $imagePath =  'fakeImages\Image_test.png';
+        Storage::put('public/images',
+         copy(public_path($imagePath), storage_path('app/public/images/Image_test.png')));
+        $image = 'images/Image_test.png';
 
         foreach ($users as $user) {
             Post::factory()->count(11)->create([
                 'user_id' => $user->id,
+                'image' => $image,
             ]);
         }
 

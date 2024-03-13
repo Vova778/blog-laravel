@@ -22,7 +22,7 @@ class PostFactory extends Factory
         return [
             'title' => $this->faker->text(15, 70),
             'content' => $this->faker->sentence(mt_rand(220,360), true),
-            'image' => 'fakeImages\Image_test.png',
+            'image' => $this->faker->image('public/',640,480,null,false),
             'created_at' => $createdAt,
             'updated_at' => $createdAt,
         ];
