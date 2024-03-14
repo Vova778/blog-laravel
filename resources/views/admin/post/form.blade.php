@@ -5,8 +5,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 bg-light p-4">
-                <form action="{{ isset($post) ? route('posts.update', $post) : route('posts.store') }}"
-                    method="POST" enctype="multipart/form-data">
+                <form action="{{ isset($post) ? route('posts.update', $post) : route('posts.store') }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     @isset($post)
                         @method('PUT')
@@ -29,13 +29,20 @@
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Image</label>
-                        <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" value="$post->image" name="image">
+                        <input type="file" class="form-control @error('image') is-invalid @enderror" id="image"
+                            name="image">
+                        @isset($post)
+                            <label for="image" class="form-label">Current Image</label><br>
+                            <img src="{{ asset('storage/' . $post->image) }}" alt="Current Image" width="200">
+                        @endisset
 
                         @error('image')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                    <div class="d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary">{{ isset($post) ? 'Update' : 'Create' }}</button>
+                    </div>
                 </form>
             </div>
         </div>
