@@ -43,6 +43,10 @@ class PostController extends Controller
     public function store(postRequest $request)
     {
 
+        if (!$request->hasFile('image')) {
+            return redirect()->back()->withErrors(['image' => 'Please upload an image'])->withInput();
+        }
+        
         $file = $request->file('image');
         $path = $file->store('images', 'public');
 

@@ -30,9 +30,8 @@ class DatabaseSeeder extends Seeder
         $users = User::all();
 
         $imagePath =  'fakeImages\Image_test.png';
-        Storage::put('public/images',
-         copy(public_path($imagePath), storage_path('app/public/images/Image_test.png')));
-        $image = 'images/Image_test.png';
+        Storage::put('public', copy(public_path($imagePath), storage_path('app/public/Image_test.png')));
+        $image = 'Image_test.png';
 
         foreach ($users as $user) {
             Post::factory()->count(11)->create([
