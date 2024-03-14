@@ -6,7 +6,9 @@ use App\Http\Requests\CommentRequest;
 use App\Models\Post;
 use App\Models\Comment;
 use App\Notifications\NewCommentNotification;
+use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 
 class CommentController extends Controller
@@ -29,9 +31,12 @@ class CommentController extends Controller
             'post_id' => $post->id
         ]);
 
-
-        if ($comment->user_id !== $post->user_id) {
-            Notification::send($post->user, new NewCommentNotification($comment, $post));
+        try {
+            if ($comment->user_id !== $post->user_id) {
+                Notification::send($post->user, new NewCommentNotification($comment, $post));
+            }
+        } catch (Exception $e) {
+            Log::error('Error sending notification: ' . $e->getMessage());
         }
 
         return redirect()->route('posts.show', $post)
